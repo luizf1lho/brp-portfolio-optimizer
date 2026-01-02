@@ -1,0 +1,301 @@
+📊 BRP PORTFOLIO OPTIMIZER - Estrutura do Projeto
+═════════════════════════════════════════════════════════════
+
+brp_optimize_portfolio/
+│
+├── 📄 DOCUMENTAÇÃO
+│   ├── README.md                    ← Guia Técnico Completo
+│   ├── SETUP.md                     ← Instalação e Troubleshooting
+│   ├── RESUMO_PROJETO.md            ← Este resumo (leia primeiro!)
+│   └── PROJECT_STRUCTURE.txt        ← Estrutura (este arquivo)
+│
+├── 🚀 EXECUÇÃO
+│   ├── app.py                       ← Aplicação Streamlit (EXECUTE ISTO)
+│   ├── example_usage.py             ← Script de uso programático
+│   ├── run.bat                      ← Execução rápida (Windows)
+│   ├── run.sh                       ← Execução rápida (Mac/Linux)
+│   └── requirements.txt             ← Dependências Python
+│
+├── 📦 PACOTE PRINCIPAL
+│   └── brp_portfolio_optimizer/
+│       │
+│       ├── __init__.py
+│       │
+│       ├── 🔧 src/  (Módulos Principais)
+│       │   ├── __init__.py
+│       │   ├── data_processor.py    ← Carrega e valida CSV
+│       │   ├── optimizer.py         ← Otimização Markowitz
+│       │   ├── metrics.py           ← 20+ métricas
+│       │   └── reports.py           ← Gera relatórios
+│       │
+│       ├── ⚙️  config/  (Configurações)
+│       │   ├── __init__.py
+│       │   └── settings.py          ← Constantes e configs
+│       │
+│       ├── 📥 data/  (Dados de Entrada)
+│       │   └── [Coloque seus CSV aqui]
+│       │
+│       ├── 📤 outputs/  (Relatórios Gerados)
+│       │   ├── Portfolio_Report.html
+│       │   └── Portfolio_Report.xlsx
+│       │
+│       └── 📝 logs/  (Logs)
+│           └── optimizer.log
+│
+├── 🧪 tests/
+│   ├── __init__.py
+│   └── test_optimizer.py            ← Suite de 9 testes
+│
+├── 🔐 .gitignore
+│
+└── 📋 INSTRUÇÕES RÁPIDAS
+
+═════════════════════════════════════════════════════════════
+
+🎯 QUICK START (30 segundos)
+
+1. Abra o terminal nesta pasta
+2. Execute (Windows):
+   .\run.bat
+   
+   Ou (Mac/Linux):
+   bash run.sh
+
+3. Navegador abrirá em http://localhost:8501
+
+═════════════════════════════════════════════════════════════
+
+📊 MÓDULOS PRINCIPAIS
+
+┌─ DataProcessor (data_processor.py)
+│  ├─ Carrega CSV
+│  ├─ Valida colunas obrigatórias
+│  ├─ Converte datas
+│  ├─ Faz pivot diário
+│  └─ Retorna matrix de PnL
+│
+├─ PortfolioOptimizer (optimizer.py)
+│  ├─ Calcula retornos anualizados
+│  ├─ Otimiza Sharpe Ratio (Markowitz)
+│  ├─ Calcula multiplicadores de risco
+│  └─ Dimensiona lotes para MT5
+│
+├─ MetricsCalculator (metrics.py)
+│  ├─ Calcula 20+ métricas
+│  ├─ Sharpe, Sortino, Calmar
+│  ├─ Drawdown, Volatilidade
+│  └─ Win Rate, Profit Factor, etc
+│
+└─ ReportGenerator (reports.py)
+   ├─ Gera gráficos matplotlib
+   ├─ Cria relatórios HTML
+   ├─ Exporta para Excel
+   └─ Tabelas formatadas
+
+═════════════════════════════════════════════════════════════
+
+🎨 INTERFACE STREAMLIT (app.py)
+
+┌─ Aba 1: Upload & Análise
+│  └─ Upload CSV → Validação → Otimização
+│
+├─ Aba 2: Resultados
+│  ├─ Gráfico Equity Curve
+│  ├─ Tabela de Métricas
+│  └─ Alocação MT5
+│
+└─ Aba 3: Relatório
+   ├─ Gerar HTML
+   ├─ Gerar Excel
+   └─ Download
+
+═════════════════════════════════════════════════════════════
+
+📈 PIPELINE DE PROCESSAMENTO
+
+    📥 CSV Upload
+        ↓
+    ✓ Validação de Colunas
+        ↓
+    ↺ Tratamento de Datas
+        ↓
+    ◊ Pivot Diário (Date × Strategy)
+        ↓
+    ◆ Otimização Markowitz
+        ↓
+    ≈ Position Sizing (Risk Adjusted)
+        ↓
+    📊 Cálculo de Métricas (20+)
+        ↓
+    📋 Geração de Relatórios
+        ↓
+    ✅ Download (HTML / Excel)
+
+═════════════════════════════════════════════════════════════
+
+📊 MÉTRICAS GERADAS
+
+Risco (6):
+  • Max Drawdown $ e %
+  • Daily Volatility %
+  • Annual Volatility %
+  • Pior Dia $ e %
+
+Retorno (3):
+  • Total Profit $
+  • Total Return %
+  • CAGR %
+
+Eficiência (8):
+  • Sharpe Ratio
+  • Sortino Ratio
+  • Calmar Ratio
+  • Profit Factor
+  • Win Rate %
+  • Avg Profit Trade
+  • Avg Loss Trade
+  • Profit/Loss Ratio
+
+Trades (5):
+  • Total Trades
+  • Winning Trades
+  • Losing Trades
+  • Best Day $ e %
+
+Temporais (5):
+  • Média Lucro Mensal
+  • Média Lucro Semanal
+  • Média Lucro Anual
+  • Dias Operando
+  • Meses Operando
+
+═════════════════════════════════════════════════════════════
+
+🔧 CONFIGURAÇÕES PERSONALIZÁVEIS
+
+No Streamlit (app.py):
+  □ Capital Inicial (padrão: $100.000)
+  □ Tolerância de DD (padrão: 25%)
+  □ Benchmark (padrão: SPY)
+
+No settings.py:
+  □ DEFAULT_CAPITAL_INICIAL
+  □ DEFAULT_RISK_TOLERANCE_DD
+  □ REQUIRED_COLUMNS
+  □ Etc...
+
+═════════════════════════════════════════════════════════════
+
+✅ CHECKLIST - O QUE FOI ENTREGUE
+
+Arquitetura:
+  ✅ Estrutura modular profissional
+  ✅ 5 módulos Python principais
+  ✅ Separação de responsabilidades
+
+Funcionalidade:
+  ✅ Carregamento e validação de CSV
+  ✅ Otimização Markowitz
+  ✅ Position Sizing inteligente
+  ✅ 20+ métricas de performance
+  ✅ Relatórios HTML e Excel
+  ✅ Configuração MT5
+
+Interface:
+  ✅ App web Streamlit
+  ✅ Design profissional
+  ✅ Upload drag & drop
+  ✅ Visualizações interativas
+
+Documentação:
+  ✅ README completo
+  ✅ SETUP com troubleshooting
+  ✅ Docstrings em todas as funções
+  ✅ Exemplos de uso
+
+Testes:
+  ✅ 9 testes unitários
+  ✅ Cobertura de módulos
+  ✅ Suite de integração
+
+Produção:
+  ✅ Scripts de execução
+  ✅ Logging detalhado
+  ✅ Tratamento de erros
+  ✅ .gitignore configurado
+
+═════════════════════════════════════════════════════════════
+
+📦 DEPENDÊNCIAS
+
+pandas          >= 1.5.0    (Dados)
+numpy           >= 1.23.0   (Cálculos)
+scipy           >= 1.9.0    (Otimização)
+matplotlib      >= 3.5.0    (Gráficos)
+streamlit       >= 1.20.0   (Web)
+openpyxl        >= 3.9.0    (Excel)
+quantstats      >= 0.2.0    (Métricas avançadas)
+
+═════════════════════════════════════════════════════════════
+
+🎓 COMO ENTENDER O CÓDIGO
+
+Iniciante:
+  1. Leia: README.md
+  2. Execute: run.bat (Windows) ou run.sh (Mac/Linux)
+  3. Use a interface web
+
+Intermediário:
+  1. Leia: example_usage.py
+  2. Execute: python example_usage.py
+  3. Explore os módulos em brp_portfolio_optimizer/src/
+
+Avançado:
+  1. Leia o código fonte comentado
+  2. Execute os testes: pytest tests/ -v
+  3. Implemente suas customizações
+
+═════════════════════════════════════════════════════════════
+
+🚀 PRÓXIMOS PASSOS RECOMENDADOS
+
+1. Fazer Upload de Dados:
+   Prepare um CSV com suas trades seguindo o formato:
+   Open time, Strategy name (Global), Profit/Loss (Global), Size
+
+2. Executar a Otimização:
+   Use a interface web para analisar e otimizar
+
+3. Gerar Relatórios:
+   Exporte em HTML (visualizar) ou Excel (dados)
+
+4. Implementar em MT5:
+   Use os lotes otimizados no seu Expert Advisor
+
+5. Monitorar:
+   Acompanhe a performance comparada ao backtest
+
+═════════════════════════════════════════════════════════════
+
+📞 SUPORTE & DOCUMENTAÇÃO
+
+Dúvidas sobre instalação?
+  → Veja SETUP.md
+
+Dúvidas sobre funcionalidade?
+  → Veja README.md
+
+Dúvidas sobre código?
+  → Consulte docstrings (comentários em """...""")
+
+Erros ao executar?
+  → Verifique logs/optimizer.log
+
+═════════════════════════════════════════════════════════════
+
+Versão: 1.0.0
+Status: ✅ PRONTO PARA PRODUÇÃO
+Desenvolvido por: BRP Quant Capital
+Data: Janeiro 2026
+
+═════════════════════════════════════════════════════════════

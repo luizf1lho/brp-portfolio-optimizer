@@ -1,0 +1,27 @@
+"""
+__init__.py - Inicializador do módulo config
+"""
+
+from .settings import (
+    PROJECT_ROOT,
+    DATA_DIR,
+    OUTPUTS_DIR,
+    DEFAULT_CAPITAL_INICIAL,
+    DEFAULT_RISK_TOLERANCE_DD,
+    REQUIRED_COLUMNS,
+    RISK_METRICS,
+    RETURN_METRICS,
+    EFFICIENCY_METRICS
+)
+
+__all__ = [
+    "PROJECT_ROOT",
+    "DATA_DIR",
+    "OUTPUTS_DIR",
+    "DEFAULT_CAPITAL_INICIAL",
+    "DEFAULT_RISK_TOLERANCE_DD",
+    "REQUIRED_COLUMNS",
+    "RISK_METRICS",
+    "RETURN_METRICS",
+    "EFFICIENCY_METRICS",
+]

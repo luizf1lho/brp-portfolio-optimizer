@@ -1,0 +1,95 @@
+# Ambiente Virtual
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Streamlit
+.streamlit/
+
+# Arquivos Temporários
+*.tmp
+*.bak
+temp_*.csv
+temp_*.html
+*.log
+
+# Outputs
+outputs/
+reports/
+*.xlsx
+*.html
+
+# Cache
+.cache/
+*.cache
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# Específico do projeto
+temp_upload.csv
+temp_qs_report_*.html
+quantstats_report_*.html
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+logs/
+*.log
+
+# Dados e Outputs
+data/*.csv
+outputs/*.html
+outputs/*.xlsx
+temp_upload.csv
+
+# Streamlit
+.streamlit/
+streamlit_cache/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
