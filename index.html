@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRP Portfolio Optimizer - Intelligent Portfolio Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 0;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .badges {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .feature p {
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tech {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .tech strong {
+            color: #667eea;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin: 15px 0;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 BRP Portfolio Optimizer</h1>
+            <p>Intelligent Portfolio Optimization with Risk Management</p>
+            <div class="badges">
+                <span class="badge">🐍 Python 3.14+</span>
+                <span class="badge">📈 Markowitz Optimization</span>
+                <span class="badge">🎯 Risk Management</span>
+                <span class="badge">✨ Open Source</span>
+            </div>
+        </header>
+        
+        <div class="section">
+            <h2>🚀 Overview</h2>
+            <p>
+                BRP Portfolio Optimizer is a professional-grade portfolio optimization tool that uses 
+                <strong>Markowitz Mean-Variance optimization</strong> to automatically allocate capital 
+                across multiple trading strategies with intelligent risk management.
+            </p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number">39</div>
+                    <div class="label">Project Files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">5</div>
+                    <div class="label">Core Modules</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">20+</div>
+                    <div class="label">Performance Metrics</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>✨ Key Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <h4>📤 CSV Upload & Processing</h4>
+                    <p>Upload your trading data in CSV format with automatic validation and preprocessing</p>
+                </div>
+                <div class="feature">
+                    <h4>🎯 Smart Optimization</h4>
+                    <p>Markowitz Mean-Variance optimization to maximize Sharpe ratio while managing risk</p>
+                </div>
+                <div class="feature">
+                    <h4>📊 Advanced Metrics</h4>
+                    <p>Calculate 20+ performance metrics including Sharpe, Sortino, Calmar ratios</p>
+                </div>
+                <div class="feature">
+                    <h4>📈 Real-time Dashboard</h4>
+                    <p>Interactive web interface built with Streamlit for easy visualization</p>
+                </div>
+                <div class="feature">
+                    <h4>📋 Professional Reports</h4>
+                    <p>Generate HTML and Excel reports with equity curves and allocation tables</p>
+                </div>
+                <div class="feature">
+                    <h4>🔍 QuantStats Integration</h4>
+                    <p>Benchmark comparison with automatic data download from Yahoo Finance</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🛠️ Technology Stack</h2>
+            <div class="tech-stack">
+                <div class="tech">
+                    <strong>Streamlit</strong>
+                    <p>Web Interface</p>
+                </div>
+                <div class="tech">
+                    <strong>Pandas</strong>
+                    <p>Data Processing</p>
+                </div>
+                <div class="tech">
+                    <strong>SciPy</strong>
+                    <p>Optimization</p>
+                </div>
+                <div class="tech">
+                    <strong>NumPy</strong>
+                    <p>Numerical Computing</p>
+                </div>
+                <div class="tech">
+                    <strong>Matplotlib</strong>
+                    <p>Visualization</p>
+                </div>
+                <div class="tech">
+                    <strong>QuantStats</strong>
+                    <p>Performance Analysis</p>
+                </div>
+                <div class="tech">
+                    <strong>YFinance</strong>
+                    <p>Market Data</p>
+                </div>
+                <div class="tech">
+                    <strong>OpenPyXL</strong>
+                    <p>Excel Export</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🚀 Quick Start</h2>
+            
+            <h3>1. Installation</h3>
+            <p>Clone the repository and install dependencies:</p>
+            <pre>git clone https://github.com/luizf1lho/brp-portfolio-optimizer.git
+cd brp-portfolio-optimizer
+pip install -r requirements.txt</pre>
+            
+            <h3>2. Run the Application</h3>
+            <p>Start the Streamlit web interface:</p>
+            <pre>streamlit run app.py</pre>
+            
+            <p>The application will open at <code>http://localhost:8501</code></p>
+            
+            <h3>3. How to Use</h3>
+            <ol>
+                <li><strong>Upload Tab:</strong> Upload your CSV file with trading data</li>
+                <li><strong>Results Tab:</strong> View optimized metrics and allocation</li>
+                <li><strong>Report Tab:</strong> Generate and download professional reports</li>
+                <li><strong>QuantStats Tab:</strong> Analyze performance vs benchmark</li>
+            </ol>
+            
+            <div class="info-box">
+                <strong>💡 Tip:</strong> Your CSV file should contain columns like:
+                <code>Open time</code>, <code>Strategy name (Global)</code>, <code>Profit/Loss (Global)</code>, <code>Size</code>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📁 Project Structure</h2>
+            <pre>brp-portfolio-optimizer/
+├── app.py                          # Main Streamlit application
+├── requirements.txt                # Python dependencies
+├── brp_portfolio_optimizer/
+│   ├── src/
+│   │   ├── data_processor.py       # CSV loading & validation
+│   │   ├── optimizer.py             # Markowitz optimization
+│   │   ├── metrics.py               # Performance metrics
+│   │   ├── reports.py               # Report generation
+│   │   └── settings.py              # Configuration
+│   └── config/
+│       └── settings.py
+├── tests/
+│   └── test_optimizer.py           # Unit tests
+├── install.bat                      # Windows installation script
+├── run.bat                          # Windows execution script
+├── cleanup.bat                      # Cleanup script
+└── README.md                        # Documentation</pre>
+        </div>
+        
+        <div class="section">
+            <h2>📊 Algorithm Details</h2>
+            
+            <h3>Markowitz Mean-Variance Optimization</h3>
+            <p>
+                The optimizer uses the classic Markowitz approach to find the optimal portfolio weights that:
+            </p>
+            <ul>
+                <li>Maximize expected returns (Sharpe ratio)</li>
+                <li>Minimize portfolio volatility</li>
+                <li>Respect risk constraints (max drawdown tolerance)</li>
+                <li>Apply position sizing multipliers for each strategy</li>
+            </ul>
+            
+            <h3>Key Metrics Calculated</h3>
+            <ul>
+                <li><strong>Sharpe Ratio:</strong> Risk-adjusted return metric</li>
+                <li><strong>Sortino Ratio:</strong> Similar to Sharpe, penalizes downside volatility only</li>
+                <li><strong>Calmar Ratio:</strong> Return to maximum drawdown ratio</li>
+                <li><strong>Maximum Drawdown:</strong> Peak-to-trough decline</li>
+                <li><strong>Win Rate:</strong> Percentage of profitable trades</li>
+                <li><strong>Profit Factor:</strong> Ratio of gross profit to gross loss</li>
+            </ul>
+            
+            <div class="info-box">
+                <strong>📌 Note:</strong> Uses 252 business days/year for annualization
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📝 CSV File Format</h2>
+            <p>Your input CSV should have the following columns:</p>
+            <pre>Open time,Strategy name (Global),Profit/Loss (Global),Size
+2024-01-01 10:00:00,Strategy A,150.50,1.0
+2024-01-01 14:30:00,Strategy B,-50.25,1.0
+2024-01-02 09:15:00,Strategy A,200.00,1.0</pre>
+            
+            <ul>
+                <li><strong>Open time:</strong> Timestamp of the trade</li>
+                <li><strong>Strategy name (Global):</strong> Identifier of the strategy</li>
+                <li><strong>Profit/Loss (Global):</strong> Trade result in currency units</li>
+                <li><strong>Size:</strong> Position size or lot</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>🔧 Installation Options</h2>
+            
+            <h3>Windows Users</h3>
+            <p>Simply run the installation script:</p>
+            <pre>install.bat</pre>
+            
+            <p>Then run the application:</p>
+            <pre>run.bat</pre>
+            
+            <h3>Mac/Linux Users</h3>
+            <pre>python -m venv venv
+source venv/bin/activate  # or `venv\Scripts\activate` on Windows
+pip install -r requirements.txt
+streamlit run app.py</pre>
+        </div>
+        
+        <div class="section">
+            <h2>📈 Performance Comparison</h2>
+            <p>
+                The application shows a detailed comparison between:
+            </p>
+            <ul>
+                <li><strong>Original Portfolio:</strong> Equal-weighted allocation</li>
+                <li><strong>Optimized Portfolio:</strong> Markowitz optimized allocation</li>
+            </ul>
+            
+            <p>Metrics include equity curves, drawdown analysis, risk-return profiles, and benchmark comparison.</p>
+        </div>
+        
+        <div class="section">
+            <h2>⚡ Requirements</h2>
+            <ul>
+                <li>Python 3.8 or higher</li>
+                <li>pip (Python package manager)</li>
+                <li>Windows, macOS, or Linux</li>
+                <li>At least 500MB of disk space</li>
+                <li>Internet connection (for benchmark data)</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>📞 Support & Documentation</h2>
+            <div class="buttons">
+                <a href="https://github.com/luizf1lho/brp-portfolio-optimizer" class="btn btn-primary">
+                    ⭐ GitHub Repository
+                </a>
+                <a href="https://github.com/luizf1lho/brp-portfolio-optimizer/issues" class="btn btn-secondary">
+                    🐛 Report Issues
+                </a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📜 License</h2>
+            <p>
+                This project is licensed under the <strong>MIT License</strong> - see the LICENSE file in the 
+                repository for details.
+            </p>
+        </div>
+        
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; border-bottom-color: white;">🎯 Version Information</h2>
+            <p><strong>Current Version:</strong> v1.0.0</p>
+            <p><strong>Release Date:</strong> January 2, 2026</p>
+            <p><strong>Status:</strong> Stable Release</p>
+            <p style="margin-top: 20px;">
+                Ready for production use. For updates and new features, check the 
+                <a href="https://github.com/luizf1lho/brp-portfolio-optimizer/releases" style="color: white; text-decoration: underline;">Releases page</a>.
+            </p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>
+            BRP Portfolio Optimizer © 2026 | Built with ❤️ by 
+            <a href="https://github.com/luizf1lho">Luiz Filho</a>
+        </p>
+        <p style="margin-top: 10px;">
+            <a href="https://github.com/luizf1lho/brp-portfolio-optimizer">GitHub</a> | 
+            <a href="https://github.com/luizf1lho/brp-portfolio-optimizer/blob/main/README.md">Documentation</a> | 
+            <a href="https://github.com/luizf1lho/brp-portfolio-optimizer/blob/main/LICENSE">License</a>
+        </p>
+    </footer>
+</body>
+</html>
