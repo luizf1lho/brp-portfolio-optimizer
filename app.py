@@ -11,6 +11,7 @@ from pathlib import Path
 import quantstats as qs
 import yfinance as yf
 from io import StringIO
+from datetime import datetime
 
 # Configure logging
 logging.basicConfig(
@@ -35,6 +36,7 @@ try:
     from optimizer import PortfolioOptimizer
     from metrics import MetricsCalculator
     from reports import ReportGenerator
+    from license_manager import LicenseManager
 except ImportError as e:
     st.error(f"❌ Error importing modules: {e}")
     st.info("💡 Tip: Check if you are in the correct project directory")
@@ -47,6 +49,74 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# ============================================================================
+# LICENSE VERIFICATION
+# ============================================================================
+
+def verify_license():
+    """Verify license at application startup"""
+    if "license_verified" not in st.session_state:
+        st.session_state.license_verified = False
+    
+    if not st.session_state.license_verified:
+        st.set_page_config(page_title="License Verification", page_icon="🔐")
+        
+        # License page
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.markdown("# 🔐 License Verification")
+            st.markdown("---")
+            
+            st.markdown("""
+            **BRP Portfolio Optimizer** requires a valid license to run.
+            
+            If you don't have a license, please contact the administrator.
+            """)
+            
+            st.markdown("### Enter Your License Details")
+            
+            email = st.text_input(
+                "Email",
+                placeholder="your.email@example.com",
+                key="license_email"
+            ).strip()
+            
+            license_key = st.text_input(
+                "License Key",
+                placeholder="EMAIL|DATE|HMAC",
+                type="password",
+                key="license_key"
+            ).strip()
+            
+            if st.button("✅ Verify License", use_container_width=True, type="primary"):
+                if not email or not license_key:
+                    st.error("❌ Please enter both email and license key")
+                else:
+                    # Verify license
+                    manager = LicenseManager("licenses.json")
+                    is_valid, message = manager.validate_license(email, license_key)
+                    
+                    if is_valid:
+                        st.session_state.license_verified = True
+                        st.session_state.user_email = email
+                        st.success(f"✅ {message}")
+                        st.rerun()
+                    else:
+                        st.error(f"❌ {message}")
+            
+            st.markdown("---")
+            st.markdown("""
+            <div style="text-align: center; color: #666; font-size: 12px;">
+                <p>BRP Portfolio Optimizer v1.0 | License System</p>
+                <p>© 2026 - All rights reserved</p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.stop()
+
+# Verify license before running app
+verify_license()
 
 # Custom CSS
 st.markdown("""
@@ -96,6 +166,11 @@ st.divider()
 # Sidebar
 with st.sidebar:
     st.markdown("## ⚙️ Settings")
+    
+    # License info
+    if "user_email" in st.session_state:
+        st.markdown(f"**Licensed to:** {st.session_state.user_email}")
+        st.divider()
     
     capital_inicial = st.number_input(
         "Initial Capital ($)",

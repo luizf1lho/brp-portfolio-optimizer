@@ -1,0 +1,9 @@
+{
+  "example@client.com": {
+    "license_key": "example@client.com|2026-02-01|A1B2C3D4E5F6G7H8",
+    "email": "example@client.com",
+    "expiration_date": "2026-02-01",
+    "created_at": "2026-01-02 10:00:00",
+    "status": "active"
+  }
+}
